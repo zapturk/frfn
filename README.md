@@ -3,7 +3,12 @@ This is a simple CLI tool to find and replay text in the file name in the curren
 
 Install
 ==================
-Coming soon
+- Install Go
+- Add the Go bin folder to your path
+- Run this in your terminal
+```
+go install github.com/zapturk/frfn@latest
+```
 
 Usage
 ==================
