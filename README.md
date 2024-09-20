@@ -8,6 +8,8 @@ Install
 - Run this in your terminal
 ```
 go install github.com/zapturk/frfn@latest
+or
+go install github.com/zapturk/frfn@v0.2.0
 ```
 
 Usage
