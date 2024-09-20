@@ -12,9 +12,11 @@ import (
 )
 
 var (
-	OldText string
-	NewText string
-	Force   bool
+	OldText     string
+	NewText     string
+	Force       bool
+	PrependText string
+	// AppendText  string
 )
 
 // replaceCmd represents the replace command
@@ -34,10 +36,14 @@ var replaceCmd = &cobra.Command{
 
 		if !Force {
 			for _, entry := range dir {
+				var str strings.Builder
 				oldFileName := entry.Name()
 				if strings.Contains(oldFileName, OldText) {
 					newFileName := strings.ReplaceAll(oldFileName, OldText, NewText)
-					fmt.Println(newFileName)
+					str.WriteString(PrependText)
+					str.WriteString(newFileName)
+					newFileName = str.String()
+					fmt.Println(oldFileName + " will change to " + newFileName)
 				}
 			}
 
@@ -53,12 +59,16 @@ var replaceCmd = &cobra.Command{
 
 		if makeChange {
 			for _, entry := range dir {
+				var str strings.Builder
 				oldFileName := entry.Name()
 				if strings.Contains(oldFileName, OldText) {
 					newFileName := strings.ReplaceAll(oldFileName, OldText, NewText)
+					str.WriteString(PrependText)
+					str.WriteString(newFileName)
+					newFileName = str.String()
 					oldPath := "./" + oldFileName
 					newPath := "./" + newFileName
-					fmt.Println(oldFileName + " changed to " + newFileName)
+					fmt.Println(oldFileName + " was changed to " + newFileName)
 
 					// try to rename the file
 					err := os.Rename(oldPath, newPath)
@@ -79,6 +89,8 @@ func init() {
 	replaceCmd.Flags().StringVarP(&OldText, "OldText", "o", "", "The old text you want to repalce in the file name")
 	replaceCmd.Flags().StringVarP(&NewText, "NewText", "n", "", "The new text you want to have in the file name")
 	replaceCmd.Flags().BoolVarP(&Force, "Force", "f", false, "Skips the dry run step and changes the file names")
+	replaceCmd.Flags().StringVarP(&PrependText, "Prepend", "p", "", "Any text you want to add to the front of the file name")
+	// replaceCmd.Flags().StringVarP(&AppendText, "Append", "a", "", "Any text you want to add to the end of the file name")
 
 	if err := replaceCmd.MarkFlagRequired("OldText"); err != nil {
 		fmt.Println(err)
