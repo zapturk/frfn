@@ -35,6 +35,7 @@ var replaceCmd = &cobra.Command{
 		}
 
 		if !Force {
+			fmt.Println("New filenames: ")
 			for _, entry := range dir {
 				var str strings.Builder
 				oldFileName := entry.Name()
@@ -43,14 +44,19 @@ var replaceCmd = &cobra.Command{
 					str.WriteString(PrependText)
 					str.WriteString(newFileName)
 					newFileName = str.String()
-					fmt.Println(oldFileName + " will change to " + newFileName)
+					fmt.Println(newFileName)
 				}
 			}
 
 			fmt.Print("Would you like to make this change? [Y/n]: ")
-			fmt.Scanln(&input)
+			n, err := fmt.Scanln(&input)
 
-			if input == "" || strings.ToLower(input) == "y" || strings.ToLower(input) == "yes" {
+			if n != 0 && err != nil {
+				fmt.Println("Error reading input:", err)
+				return
+			}
+
+			if n == 0 || strings.ToLower(input) == "y" || strings.ToLower(input) == "yes" {
 				makeChange = true
 			} else {
 				fmt.Println("No change was made")
