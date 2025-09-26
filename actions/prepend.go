@@ -39,7 +39,6 @@ func PrependFileName(text string, force bool) error {
 			newFileName := text + oldFileName
 			oldPath := "./" + oldFileName
 			newPath := "./" + newFileName
-			fmt.Println(oldFileName + " was changed to " + newFileName)
 
 			// try to rename the file
 			err := os.Rename(oldPath, newPath)
@@ -47,6 +46,8 @@ func PrependFileName(text string, force bool) error {
 				fmt.Println("Failed to rename file" + oldFileName)
 				return err
 			}
+
+			fmt.Println(oldFileName + " was changed to " + newFileName)
 		}
 	}
 	return nil

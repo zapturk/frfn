@@ -14,7 +14,7 @@ go install github.com/zapturk/frfn@v0.2.0
 
 Usage
 ==================
-This tool has two main commands: `replace` and `Prepend`.
+This tool has three main commands: `replace`, `prepend`, and `append`.
 
 ### Replace
 
@@ -42,7 +42,7 @@ frfn replace -o "old" -n "new" -f
 
 ### Prepend
 
-The `Prepend` command (aliased as `p`) adds text to the beginning of file names in the current directory.
+The `prepend` command (aliased as `p`) adds text to the beginning of file names in the current directory.
 
 **Options:**
 
@@ -54,13 +54,36 @@ The `Prepend` command (aliased as `p`) adds text to the beginning of file names 
 To prepend "prefix-" to all file names:
 
 ```bash
-frfn Prepend -t "prefix-"
+frfn prepend -t "prefix-"
 ```
 
 To execute the prepending:
 
 ```bash
-frfn Prepend -t "prefix-" -f
+frfn prepend -t "prefix-" -f
+```
+
+### Append
+
+The `append` command (aliased as `a`) adds text to the end of file names in the current directory.
+
+**Options:**
+
+*   `--Text`, `-t`: (Required) The text to append to the file names.
+*   `--Force`, `-f`: (Optional) By default, the command runs in a "dry run" mode. Use this flag to execute the file renaming.
+
+**Example:**
+
+To append "-suffix" to all file names:
+
+```bash
+frfn append -t "-suffix"
+```
+
+To execute the appending:
+
+```bash
+frfn append -t "-suffix" -f
 ```
 
 

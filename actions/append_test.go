@@ -10,7 +10,7 @@ import (
 	"github.com/zapturk/frfn/actions"
 )
 
-func TestPrependFileName(t *testing.T) {
+func TestAppendFileName(t *testing.T) {
 	// Helper function to create a temporary directory and files for testing
 	createTestDir := func(t *testing.T, files []string) string {
 		t.Helper()
@@ -37,17 +37,17 @@ func TestPrependFileName(t *testing.T) {
 		os.Stdin = r
 		go func() {
 			defer w.Close()
-			w.WriteString(input + "\n")
+			w.WriteString(input + "")
 		}()
 		return func() {
 			os.Stdin = oldStdin
 		}
 	}
 
-	t.Run("force prepend", func(t *testing.T) {
+	t.Run("force append", func(t *testing.T) {
 		// Test setup
 		initialFiles := []string{"foo.txt", "test.txt"}
-		expectedFiles := []string{"bar_foo.txt", "bar_test.txt"}
+		expectedFiles := []string{"foo_bar.txt", "test_bar.txt"}
 		testDir := createTestDir(t, initialFiles)
 		defer os.RemoveAll(testDir)
 
@@ -65,7 +65,7 @@ func TestPrependFileName(t *testing.T) {
 		os.Stdout = w
 
 		// Action
-		err = actions.PrependFileName("bar_", true)
+		err = actions.AppendFileName("_bar", true)
 
 		// Assertions
 		w.Close()
@@ -75,7 +75,7 @@ func TestPrependFileName(t *testing.T) {
 		output := buf.String()
 
 		if err != nil {
-			t.Errorf("PrependFileName() error = %v, wantErr %v", err, false)
+			t.Errorf("AppendFileName() error = %v, wantErr %v", err, false)
 		}
 
 		files, err := os.ReadDir(".")
@@ -98,7 +98,7 @@ func TestPrependFileName(t *testing.T) {
 			}
 		}
 
-		expectedMsg := "foo.txt was changed to bar_foo.txt"
+		expectedMsg := "foo.txt was changed to foo_bar.txt"
 		if !strings.Contains(output, expectedMsg) {
 			t.Errorf("Expected output to contain %q, but got %q", expectedMsg, output)
 		}
@@ -107,7 +107,7 @@ func TestPrependFileName(t *testing.T) {
 	t.Run("confirm with y", func(t *testing.T) {
 		// Test setup
 		initialFiles := []string{"foo.txt", "test.txt"}
-		expectedFiles := []string{"bar_foo.txt", "bar_test.txt"}
+		expectedFiles := []string{"foo_bar.txt", "test_bar.txt"}
 		testDir := createTestDir(t, initialFiles)
 		defer os.RemoveAll(testDir)
 
@@ -128,7 +128,7 @@ func TestPrependFileName(t *testing.T) {
 		os.Stdout = w
 
 		// Action
-		err = actions.PrependFileName("bar_", false)
+		err = actions.AppendFileName("_bar", false)
 
 		// Assertions
 		w.Close()
@@ -138,7 +138,7 @@ func TestPrependFileName(t *testing.T) {
 		output := buf.String()
 
 		if err != nil {
-			t.Errorf("PrependFileName() error = %v, wantErr %v", err, false)
+			t.Errorf("AppendFileName() error = %v, wantErr %v", err, false)
 		}
 
 		files, err := os.ReadDir(".")
@@ -161,7 +161,7 @@ func TestPrependFileName(t *testing.T) {
 			}
 		}
 
-		expectedMsg := "foo.txt will change to bar_foo.txt"
+		expectedMsg := "foo.txt will change to foo_bar.txt"
 		if !strings.Contains(output, expectedMsg) {
 			t.Errorf("Expected output to contain %q, but got %q", expectedMsg, output)
 		}
@@ -170,7 +170,7 @@ func TestPrependFileName(t *testing.T) {
 	t.Run("confirm with yes", func(t *testing.T) {
 		// Test setup
 		initialFiles := []string{"foo.txt", "test.txt"}
-		expectedFiles := []string{"bar_foo.txt", "bar_test.txt"}
+		expectedFiles := []string{"foo_bar.txt", "test_bar.txt"}
 		testDir := createTestDir(t, initialFiles)
 		defer os.RemoveAll(testDir)
 
@@ -191,7 +191,7 @@ func TestPrependFileName(t *testing.T) {
 		os.Stdout = w
 
 		// Action
-		err = actions.PrependFileName("bar_", false)
+		err = actions.AppendFileName("_bar", false)
 
 		// Assertions
 		w.Close()
@@ -201,7 +201,7 @@ func TestPrependFileName(t *testing.T) {
 		output := buf.String()
 
 		if err != nil {
-			t.Errorf("PrependFileName() error = %v, wantErr %v", err, false)
+			t.Errorf("AppendFileName() error = %v, wantErr %v", err, false)
 		}
 
 		files, err := os.ReadDir(".")
@@ -224,7 +224,7 @@ func TestPrependFileName(t *testing.T) {
 			}
 		}
 
-		expectedMsg := "foo.txt will change to bar_foo.txt"
+		expectedMsg := "foo.txt will change to foo_bar.txt"
 		if !strings.Contains(output, expectedMsg) {
 			t.Errorf("Expected output to contain %q, but got %q", expectedMsg, output)
 		}
@@ -233,7 +233,7 @@ func TestPrependFileName(t *testing.T) {
 	t.Run("confirm with enter", func(t *testing.T) {
 		// Test setup
 		initialFiles := []string{"foo.txt", "test.txt"}
-		expectedFiles := []string{"bar_foo.txt", "bar_test.txt"}
+		expectedFiles := []string{"foo_bar.txt", "test_bar.txt"}
 		testDir := createTestDir(t, initialFiles)
 		defer os.RemoveAll(testDir)
 
@@ -254,7 +254,7 @@ func TestPrependFileName(t *testing.T) {
 		os.Stdout = w
 
 		// Action
-		err = actions.PrependFileName("bar_", false)
+		err = actions.AppendFileName("_bar", false)
 
 		// Assertions
 		w.Close()
@@ -264,7 +264,7 @@ func TestPrependFileName(t *testing.T) {
 		output := buf.String()
 
 		if err != nil {
-			t.Errorf("PrependFileName() error = %v, wantErr %v", err, false)
+			t.Errorf("AppendFileName() error = %v, wantErr %v", err, false)
 		}
 
 		files, err := os.ReadDir(".")
@@ -287,7 +287,7 @@ func TestPrependFileName(t *testing.T) {
 			}
 		}
 
-		expectedMsg := "foo.txt will change to bar_foo.txt"
+		expectedMsg := "foo.txt will change to foo_bar.txt"
 		if !strings.Contains(output, expectedMsg) {
 			t.Errorf("Expected output to contain %q, but got %q", expectedMsg, output)
 		}
@@ -317,7 +317,7 @@ func TestPrependFileName(t *testing.T) {
 		os.Stdout = w
 
 		// Action
-		err = actions.PrependFileName("bar_", false)
+		err = actions.AppendFileName("_bar", false)
 
 		// Assertions
 		w.Close()
@@ -327,7 +327,7 @@ func TestPrependFileName(t *testing.T) {
 		output := buf.String()
 
 		if err != nil {
-			t.Errorf("PrependFileName() error = %v, wantErr %v", err, false)
+			t.Errorf("AppendFileName() error = %v, wantErr %v", err, false)
 		}
 
 		files, err := os.ReadDir(".")
