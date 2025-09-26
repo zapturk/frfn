@@ -19,7 +19,7 @@ func main() {
 		Commands: []*cli.Command{
 			{
 				Name:                  "replace",
-				Usage:                 "Replace old text of a file name with new text.",
+				Usage:                 "Replace old text of a file name with new text for all files in the current directory.",
 				EnableShellCompletion: true,
 				Aliases:               []string{"r"},
 				Flags: []cli.Flag{
@@ -48,7 +48,7 @@ func main() {
 			},
 			{
 				Name:    "Prepend",
-				Usage:   "Add text to the front of a file name.",
+				Usage:   "Add text to the front of all files name in the current directory.",
 				Aliases: []string{"p"},
 				Flags: []cli.Flag{
 					&cli.StringFlag{
@@ -62,6 +62,9 @@ func main() {
 						Aliases: []string{"f"},
 						Usage:   "Skips the dry run step and changes the file names",
 					},
+				},
+				Action: func(ctx context.Context, c *cli.Command) error {
+					return actions.PrependFileName(c.String("Text"), c.Bool("Force"))
 				},
 			},
 		},
