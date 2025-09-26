@@ -9,7 +9,7 @@ Install
 ```
 go install github.com/zapturk/frfn@latest
 or
-go install github.com/zapturk/frfn@v0.2.0
+go install github.com/zapturk/frfn@v1.0.0
 ```
 
 Usage
