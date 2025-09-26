@@ -14,7 +14,54 @@ go install github.com/zapturk/frfn@v0.2.0
 
 Usage
 ==================
-Coming Soon
+This tool has two main commands: `replace` and `Prepend`.
+
+### Replace
+
+The `replace` command (aliased as `r`) finds and replaces text within file names in the current directory.
+
+**Options:**
+
+*   `--OldText`, `-o`: (Required) The text to be replaced in the file name.
+*   `--NewText`, `-n`: (Required) The new text to replace the old text.
+*   `--Force`, `-f`: (Optional) By default, the command runs in a "dry run" mode, showing the changes without applying them. Use this flag to execute the file renaming.
+
+**Example:**
+
+To replace "old" with "new" in file names:
+
+```bash
+frfn replace -o "old" -n "new"
+```
+
+To execute the replacement:
+
+```bash
+frfn replace -o "old" -n "new" -f
+```
+
+### Prepend
+
+The `Prepend` command (aliased as `p`) adds text to the beginning of file names in the current directory.
+
+**Options:**
+
+*   `--Text`, `-t`: (Required) The text to prepend to the file names.
+*   `--Force`, `-f`: (Optional) By default, the command runs in a "dry run" mode. Use this flag to execute the file renaming.
+
+**Example:**
+
+To prepend "prefix-" to all file names:
+
+```bash
+frfn Prepend -t "prefix-"
+```
+
+To execute the prepending:
+
+```bash
+frfn Prepend -t "prefix-" -f
+```
 
 
 Contributors
