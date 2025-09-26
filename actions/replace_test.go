@@ -2,7 +2,6 @@ package actions_test
 
 import (
 	"bytes"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -79,7 +78,7 @@ func TestReplaceFileName(t *testing.T) {
 			t.Errorf("ReplaceFileName() error = %v, wantErr %v", err, false)
 		}
 
-		files, err := ioutil.ReadDir(".")
+		files, err := os.ReadDir(".")
 		if err != nil {
 			t.Fatalf("Failed to read dir: %v", err)
 		}
@@ -142,7 +141,7 @@ func TestReplaceFileName(t *testing.T) {
 			t.Errorf("ReplaceFileName() error = %v, wantErr %v", err, false)
 		}
 
-		files, err := ioutil.ReadDir(".")
+		files, err := os.ReadDir(".")
 		if err != nil {
 			t.Fatalf("Failed to read dir: %v", err)
 		}
@@ -205,7 +204,7 @@ func TestReplaceFileName(t *testing.T) {
 			t.Errorf("ReplaceFileName() error = %v, wantErr %v", err, false)
 		}
 
-		files, err := ioutil.ReadDir(".")
+		files, err := os.ReadDir(".")
 		if err != nil {
 			t.Fatalf("Failed to read dir: %v", err)
 		}
@@ -268,7 +267,7 @@ func TestReplaceFileName(t *testing.T) {
 			t.Errorf("ReplaceFileName() error = %v, wantErr %v", err, false)
 		}
 
-		files, err := ioutil.ReadDir(".")
+		files, err := os.ReadDir(".")
 		if err != nil {
 			t.Fatalf("Failed to read dir: %v", err)
 		}
@@ -331,7 +330,7 @@ func TestReplaceFileName(t *testing.T) {
 			t.Errorf("ReplaceFileName() error = %v, wantErr %v", err, false)
 		}
 
-		files, err := ioutil.ReadDir(".")
+		files, err := os.ReadDir(".")
 		if err != nil {
 			t.Fatalf("Failed to read dir: %v", err)
 		}
@@ -381,7 +380,7 @@ func TestReplaceFileName(t *testing.T) {
 			t.Errorf("ReplaceFileName() error = %v, wantErr %v", err, false)
 		}
 
-		files, err := ioutil.ReadDir(".")
+		files, err := os.ReadDir(".")
 		if err != nil {
 			t.Fatalf("Failed to read dir: %v", err)
 		}

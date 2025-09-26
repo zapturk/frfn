@@ -67,6 +67,27 @@ func main() {
 					return actions.PrependFileName(c.String("Text"), c.Bool("Force"))
 				},
 			},
+			{
+				Name:    "append",
+				Usage:   "Add text to the end of all files name in the current directory.",
+				Aliases: []string{"a"},
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:     "Text",
+						Aliases:  []string{"t"},
+						Usage:    "The text you want to add to the end of the file name",
+						Required: true,
+					},
+					&cli.BoolFlag{
+						Name:    "Force",
+						Aliases: []string{"f"},
+						Usage:   "Skips the dry run step and changes the file names",
+					},
+				},
+				Action: func(ctx context.Context, c *cli.Command) error {
+					return actions.AppendFileName(c.String("Text"), c.Bool("Force"))
+				},
+			},
 		},
 	}
 	if err := app.Run(context.Background(), os.Args); err != nil {
