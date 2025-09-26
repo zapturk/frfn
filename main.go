@@ -47,7 +47,7 @@ func main() {
 				},
 			},
 			{
-				Name:    "Prepend",
+				Name:    "prepend",
 				Usage:   "Add text to the front of all files name in the current directory.",
 				Aliases: []string{"p"},
 				Flags: []cli.Flag{
