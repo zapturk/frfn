@@ -1,5 +1,5 @@
 # Find and Replace File Name
-This is a simple CLI tool to find and replay text in the file name in the current directry.
+This is a simple CLI tool to find and replace text in the file name in the current directry.
 
 Install
 ==================
@@ -8,7 +8,8 @@ Install
 - Run this in your terminal
 ```
 go install github.com/zapturk/frfn@latest
-or
+```
+```
 go install github.com/zapturk/frfn@v1.0.0
 ```
 
